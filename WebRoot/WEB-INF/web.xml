@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-</web-app>
+   <servlet>
+    <servlet-name>CommitService</servlet-name>
+    <servlet-class>com.gs.service.CommitService</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>CommitService</servlet-name>
+    <url-pattern>/CommitService</url-pattern>
+  </servlet-mapping>
+ </web-app>
+ 
