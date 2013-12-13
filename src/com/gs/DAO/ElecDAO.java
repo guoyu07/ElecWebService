@@ -23,9 +23,9 @@ public class ElecDAO {
 	private String dbname;
 	private String dbpass;
 	// 创建静态全局变量
-	static Connection conn;
+	private  Connection conn;
 
-	static Statement st;
+	private Statement st;
 
 	/* 插入数据记录，并输出插入的数据记录数 */
 	public void save(Elec e) throws SQLException {

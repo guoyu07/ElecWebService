@@ -17,7 +17,7 @@ public class TestServlet {
 	@Test
 	public void test() throws HttpException, IOException {
 		HttpClient hc = new HttpClient();
-		PostMethod p = new PostMethod("http://127.0.0.1:8888/ElecWebService/CommitService");
+		PostMethod p = new PostMethod("http://localhost:8888/ElecWebService/CommitService");
 		Elec e = new Elec();
 		e.setDate(20131212);
 		e.setDay(12);

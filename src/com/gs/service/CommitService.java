@@ -31,11 +31,18 @@ public class CommitService extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		Elec elec = new Gson().fromJson(req.getParameter("json"),Elec.class);
 		try {
-			dao.save(new Gson().fromJson(req.getParameter("json"),Elec.class));
+			dao.save(elec);
 		} catch (JsonSyntaxException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			try {
+				dao.delete(elec.getDate());
+				dao.save(elec);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
 		resp.getWriter().write("Commit OK");
