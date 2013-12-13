@@ -12,3 +12,6 @@ ElecWebService
 - 810 更新
 - 880 SQL错误
 - 890 Json格式错误
+
+# 身份验证 #
+无论是在post方法还是get方法都要加入user参数.gsh199449为get的user,wpl或者gsh199449都可以作为post的user.

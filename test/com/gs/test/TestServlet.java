@@ -17,10 +17,10 @@ public class TestServlet {
 	@Test
 	public void test() throws HttpException, IOException {
 		HttpClient hc = new HttpClient();
-		PostMethod p = new PostMethod("http://localhost:8888/ElecWebService/CommitService");
+		PostMethod p = new PostMethod("http://202.206.64.193/ElecWebService/CommitService");
 		Elec e = new Elec();
-		e.setDate(20131212);
-		e.setDay(12);
+		e.setDate(20131209);
+		e.setDay(9);
 		e.setElecnum(120);
 		e.setInputelec(100);
 		e.setMonth(12);

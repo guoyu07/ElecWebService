@@ -23,7 +23,14 @@ public class CommitService extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		doPost(req, resp);
+		String user = req.getParameter("user");
+		if(user == null){resp.setStatus(403);return;}
+		if (user.equals("gsh199449")) {
+			doPost(req, resp);
+		}else{
+			resp.setStatus(403);
+		}
+		
 	}
 
 	private static final long serialVersionUID = -2651430616398372911L;
@@ -31,6 +38,9 @@ public class CommitService extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		String user = req.getParameter("user");
+		if(user == null){resp.setStatus(403);return;}
+		if(!(user.equals("wpl")||user.equals("gsh199449"))) {resp.setStatus(403);return;}
 		int commitcode = 0;
 		Elec elec = null;
 		try {
