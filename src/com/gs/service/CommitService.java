@@ -17,7 +17,7 @@ public class CommitService extends HttpServlet {
 	private ElecDAO dao;
 	@Override
 	public void init() throws ServletException {
-		dao = new ElecDAO("root","zhouking");
+		
 	}
 
 	@Override
@@ -41,6 +41,7 @@ public class CommitService extends HttpServlet {
 		String user = req.getParameter("user");
 		if(user == null){resp.setStatus(403);return;}
 		if(!(user.equals("wpl")||user.equals("gsh199449"))) {resp.setStatus(403);return;}
+		dao = new ElecDAO("root","zhouking");
 		int commitcode = 0;
 		Elec elec = null;
 		try {
@@ -69,6 +70,7 @@ public class CommitService extends HttpServlet {
 		}
 		resp.getWriter().write(String.valueOf(commitcode));
 		resp.getWriter().flush();
+		dao.destory();
 	}
 
 }
