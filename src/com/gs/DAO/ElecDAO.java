@@ -252,4 +252,8 @@ public class ElecDAO {
 		st.close();
 		return re;
 	}
+	
+	public boolean isConnected() throws SQLException{
+		return conn.isClosed();
+	}
 }
