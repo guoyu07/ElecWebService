@@ -15,6 +15,7 @@ import com.gs.model.Elec;
 
 public class CommitService extends HttpServlet {
 	private ElecDAO dao;
+
 	@Override
 	public void init() throws ServletException {
 		dao = new ElecDAO("root", "zhouking");
@@ -24,13 +25,18 @@ public class CommitService extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String user = req.getParameter("user");
-		if(user == null){resp.setStatus(403);return;}
-		if (user.equals("gsh199449")) {
-			doPost(req, resp);
-		}else{
-			resp.setStatus(403);
+		boolean validate = false;
+		try {
+			new Gson().fromJson(req.getParameter("json"), Elec.class);
+			validate = true;
+		} catch (JsonSyntaxException e) {
 		}
-		
+		if (user == null || validate == false || !user.equals("gsh199449")) {
+			resp.sendRedirect("CommitService.html");
+			return;
+		}
+		doPost(req, resp);
+
 	}
 
 	private static final long serialVersionUID = -2651430616398372911L;
@@ -39,8 +45,14 @@ public class CommitService extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String user = req.getParameter("user");
-		if(user == null){resp.setStatus(403);return;}
-		if(!(user.equals("wpl")||user.equals("gsh199449"))) {resp.setStatus(403);return;}
+		if (user == null) {
+			resp.setStatus(403);
+			return;
+		}
+		if (!(user.equals("wpl") || user.equals("gsh199449"))) {
+			resp.setStatus(403);
+			return;
+		}
 		try {
 			if (!dao.isConnected()) {
 				dao = new ElecDAO("root", "zhouking");
@@ -51,7 +63,7 @@ public class CommitService extends HttpServlet {
 		int commitcode = 0;
 		Elec elec = null;
 		try {
-			elec = new Gson().fromJson(req.getParameter("json"),Elec.class);
+			elec = new Gson().fromJson(req.getParameter("json"), Elec.class);
 		} catch (JsonSyntaxException e2) {
 			commitcode = 890;
 			e2.printStackTrace();
@@ -59,7 +71,7 @@ public class CommitService extends HttpServlet {
 			resp.getWriter().flush();
 			return;
 		}
-		
+
 		try {
 			dao.save(elec);
 			commitcode = 820;
