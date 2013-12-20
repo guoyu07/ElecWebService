@@ -16,12 +16,12 @@ public class MsgDAO {
 	private Logger logger = Logger.getLogger(this.getClass());
 	private String dbname;
 	private String dbpass;
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¬È«ï¿½Ö±ï¿½ï¿½ï¿½
+	// ´´½¨¾²Ì¬È«¾Ö±äÁ¿
 	private Connection conn;
 
 	private Statement st;
 
-	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½Â¼ï¿½ï¿½ */
+	/* ²åÈëÊý¾Ý¼ÇÂ¼£¬²¢Êä³ö²åÈëµÄÊý¾Ý¼ÇÂ¼Êý */
 	public void save(Msg m) throws SQLException {
 		String sql = "INSERT INTO `elec`.`msg` (`msg`, `sender`, `recipient`, `time`) VALUES ('"
 				+ m.getMsg()
@@ -29,24 +29,24 @@ public class MsgDAO {
 				+ m.getSender()
 				+ "', '"
 				+ m.getRecipient() + "', '" + m.getTime() + "');";
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½sqlï¿½ï¿½ï¿½ï¿½
-		st = (Statement) conn.createStatement(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð¾ï¿½Ì¬sqlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Statementï¿½ï¿½ï¿½ï¿½
-		st.executeUpdate(sql); // Ö´ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sqlï¿½ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ¸ï¿½ï¿½ï¿½
+		// ²åÈëÊý¾ÝµÄsqlÓï¾ä
+		st = (Statement) conn.createStatement(); // ´´½¨ÓÃÓÚÖ´ÐÐ¾²Ì¬sqlÓï¾äµÄStatement¶ÔÏó
+		st.executeUpdate(sql); // Ö´ÐÐ²åÈë²Ù×÷µÄsqlÓï¾ä£¬²¢·µ»Ø²åÈëÊý¾ÝµÄ¸öÊý
 	}
 
-	/* ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ÓµÄºï¿½ï¿½ï¿½ */
+	/* »ñÈ¡Êý¾Ý¿âÁ¬½ÓµÄº¯Êý */
 	public Connection getConnection() {
-		conn = null; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½Connectionï¿½ï¿½ï¿½ï¿½
+		conn = null; // ´´½¨ÓÃÓÚÁ¬½ÓÊý¾Ý¿âµÄConnection¶ÔÏó
 		try {
-			Class.forName("com.mysql.jdbc.Driver");// ï¿½ï¿½ï¿½ï¿½Mysqlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			Class.forName("com.mysql.jdbc.Driver");// ¼ÓÔØMysqlÊý¾ÝÇý¶¯
 
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/elec", dbname, dbpass);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					"jdbc:mysql://localhost:3306/elec", dbname, dbpass);// ´´½¨Êý¾ÝÁ¬½Ó
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		return conn; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
+		return conn; // ·µ»ØËù½¨Á¢µÄÊý¾Ý¿âÁ¬½Ó
 	}
 
 	/**

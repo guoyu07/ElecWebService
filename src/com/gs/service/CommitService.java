@@ -53,13 +53,7 @@ public class CommitService extends HttpServlet {
 			resp.setStatus(403);
 			return;
 		}
-		try {
-			if (!dao.isConnected()) {
-				dao = new ElecDAO("root", "");//FIXME
-			}
-		} catch (SQLException e3) {
-			e3.printStackTrace();
-		}
+			dao = new ElecDAO("root", "");//FIXME
 		int commitcode = 0;
 		Elec elec = null;
 		try {
