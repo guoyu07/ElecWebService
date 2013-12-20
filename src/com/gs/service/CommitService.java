@@ -18,7 +18,7 @@ public class CommitService extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		dao = new ElecDAO("root", "zhouking");
+		dao = new ElecDAO("root", "");//FIXME
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class CommitService extends HttpServlet {
 		}
 		try {
 			if (!dao.isConnected()) {
-				dao = new ElecDAO("root", "zhouking");
+				dao = new ElecDAO("root", "");//FIXME
 			}
 		} catch (SQLException e3) {
 			e3.printStackTrace();
