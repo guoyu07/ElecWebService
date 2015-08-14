@@ -13,35 +13,35 @@ import org.apache.log4j.Logger;
 
 public class JavaMail {
 	private Logger logger = Logger.getLogger(this.getClass());
-	// ÉèÖÃ·şÎñÆ÷
+	// è®¾ç½®æœåŠ¡å™¨
 	private static String KEY_SMTP = "mail.smtp.host";
 	private static String VALUE_SMTP = "smtp.qq.com";
-	// ·şÎñÆ÷ÑéÖ¤
+	// æœåŠ¡å™¨éªŒè¯
 	private static String KEY_PROPS = "mail.smtp.auth";
 	private boolean VALUE_PROPS = true;
-	// ·¢¼şÈËÓÃ»§Ãû¡¢ÃÜÂë
+	// å‘ä»¶äººç”¨æˆ·åã€å¯†ç 
 	private String SEND_USER = "574361375@qq.com";
 	private String SEND_UNAME = "574361375@qq.com";
-	private String SEND_PWD = "fashion19940409";
-	// ½¨Á¢»á»°
+	private String SEND_PWD = "";
+	// å»ºç«‹ä¼šè¯
 	private MimeMessage message;
 	private Session s;
 
 	/*
-	 * 46. * ³õÊ¼»¯·½·¨ 47.
+	 * 46. * åˆå§‹åŒ–æ–¹æ³• 47.
 	 */
 	public JavaMail() {
 		/*
 		 * Properties props = System.getProperties();
 		 * props.setProperty(KEY_SMTP, VALUE_SMTP); props.put(KEY_PROPS,
 		 * VALUE_PROPS); s = Session.getInstance(props);
-		 * s.setDebug(true);¿ªÆôºóÓĞµ÷ÊÔĞÅÏ¢ message = new MimeMessage(s);
+		 * s.setDebug(true);å¼€å¯åæœ‰è°ƒè¯•ä¿¡æ¯ message = new MimeMessage(s);
 		 */
 	}
 
 	/**
-	 * 58. * ·¢ËÍÓÊ¼ş 59. * 60. * @param headName 61. * ÓÊ¼şÍ·ÎÄ¼şÃû 62. * @param sendHtml
-	 * 63. * ÓÊ¼şÄÚÈİ 64. * @param receiveUser 65. * ÊÕ¼şÈËµØÖ· 66.
+	 * 58. * å‘é€é‚®ä»¶ 59. * 60. * @param headName 61. * é‚®ä»¶å¤´æ–‡ä»¶å 62. * @param sendHtml
+	 * 63. * é‚®ä»¶å†…å®¹ 64. * @param receiveUser 65. * æ”¶ä»¶äººåœ°å€ 66.
 	 */
 	public boolean doSendHtmlEmail(String headName, String sendHtml,
 			String receiveUser) {
@@ -51,27 +51,27 @@ public class JavaMail {
 		//props.put("mail.smtp.auth", "true");
 		props.setProperty("mail.smtp.auth", "true");
 		s = Session.getInstance(props);
-		/* s.setDebug(true);¿ªÆôºóÓĞµ÷ÊÔĞÅÏ¢ */
+		/* s.setDebug(true);å¼€å¯åæœ‰è°ƒè¯•ä¿¡æ¯ */
 		message = new MimeMessage(s);
 
 		boolean b = true;
 		try {
-			// ·¢¼şÈË
+			// å‘ä»¶äºº
 			InternetAddress from = new InternetAddress(SEND_USER);
 			message.setFrom(from);
-			// ÊÕ¼şÈË
+			// æ”¶ä»¶äºº
 			InternetAddress to = new InternetAddress(receiveUser);
 			message.setRecipient(Message.RecipientType.TO, to);
-			// ÓÊ¼ş±êÌâ
+			// é‚®ä»¶æ ‡é¢˜
 			message.setSubject(headName);
 			String content = sendHtml.toString();
-			// ÓÊ¼şÄÚÈİ,Ò²¿ÉÒÔÊ¹´¿ÎÄ±¾"text/plain"
+			// é‚®ä»¶å†…å®¹,ä¹Ÿå¯ä»¥ä½¿çº¯æ–‡æœ¬"text/plain"
 			message.setContent(content, "text/html;charset=GBK");
 			message.saveChanges();
 			Transport transport = s.getTransport("smtp");
-			// smtpÑéÖ¤£¬¾ÍÊÇÄãÓÃÀ´·¢ÓÊ¼şµÄÓÊÏäÓÃ»§ÃûÃÜÂë
+			// smtpéªŒè¯ï¼Œå°±æ˜¯ä½ ç”¨æ¥å‘é‚®ä»¶çš„é‚®ç®±ç”¨æˆ·åå¯†ç 
 			transport.connect(VALUE_SMTP, SEND_UNAME, SEND_PWD);
-			// ·¢ËÍ
+			// å‘é€
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 			
@@ -90,6 +90,6 @@ public class JavaMail {
 
 	public static void main(String[] args) {
 		JavaMail se = new JavaMail();
-		se.doSendHtmlEmail("ÓÊ¼şÍ·ÎÄ¼şÃû", "ÓÊ¼şÄÚÈİ", "63388@qq.com");
+		se.doSendHtmlEmail("é‚®ä»¶å¤´æ–‡ä»¶å", "é‚®ä»¶å†…å®¹", "63388@qq.com");
 	}
 }
